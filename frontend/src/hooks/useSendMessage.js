@@ -5,7 +5,7 @@ import useGroup from "../Zustand/useGroup";
 
 const useSendMessage = () => {
     const [loading,setLoading] = useState(false);
-    let url = "https://chatapp-iyi3.onrender.com/api/messages/";
+    let url = "http://localhost:5000/api/messages/";
     const {messages,setMessages,selectedConversation} = useConversation();
     const {selectedGroup,groupMessages,setGroupMessages} = useGroup();
     if(selectedGroup){
@@ -22,7 +22,8 @@ const useSendMessage = () => {
         const res = await fetch(url,{
             method:"POST",
             headers:{
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                jwtToken:document.cookie.split('=')[1],
             },
             credentials:"include",
             body:JSON.stringify({message,file:fileMessage})

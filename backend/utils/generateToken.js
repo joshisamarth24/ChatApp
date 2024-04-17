@@ -8,6 +8,7 @@ const generateTokenAndSetCookie = (userId,res) => {
         maxAge: 15*24*60*60*1000,
         secure: true,
     })
+    return token;
 }
 
 export default generateTokenAndSetCookie;

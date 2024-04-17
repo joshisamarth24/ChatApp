@@ -11,11 +11,12 @@ export const useDeleteChat = () => {
         const clearChat = async()=>{
             setLoading(true);
             try {
-                const res = await fetch(`https://chatapp-iyi3.onrender.com/api/chat/clear/${convId}`,{
+                const res = await fetch(`http://localhost:5000/api/chat/clear/${convId}`,{
                     method: 'POST',
                     credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
+                        jwtToken: document.cookie.split('=')[1],
                     },
                 });
                 if(res.status === 200 && selectedConversation){

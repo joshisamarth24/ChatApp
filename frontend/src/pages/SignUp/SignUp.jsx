@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ChatLogo from '../../components/Logo'
 import { Link } from 'react-router-dom'
 import useSignUp from '../../hooks/useSignUp'
+import toast from 'react-hot-toast'
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -39,9 +40,25 @@ const uploadFile = async (image) => {
      const data = await res.json();
      setProfilePic(data.secure_url);
  };
+
+
+ const handleInputErrors = ({fullName,username,email,password,confirmPassword,profilePic}) => {
+  if(!fullName || !username || !email || !password || !confirmPassword) {
+    toast.error("All fields are required.");
+    return false;
+  }
+  if(password !== confirmPassword) {
+    toast.error("Password doesn't match.");
+    return false;
+  }
+  return true;
+};
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-   
+    const success = handleInputErrors(inputs);
+   if(success){
     const userDetails = new FormData();
     userDetails.append('fullName',inputs.fullName);
     userDetails.append('username',inputs.username);
@@ -51,6 +68,7 @@ const uploadFile = async (image) => {
     userDetails.append('profilePic',profilePic);
    
     signup(userDetails);
+   }
 }
 
   return (

@@ -7,9 +7,12 @@ const useGetGroupChats = () => {
     useEffect(() => {
         const getGroupChats = async () => {
             try {
-                const res = await fetch('https://chatapp-iyi3.onrender.com/api/chat/groupChat', {
+                const res = await fetch('http://localhost:5000/api/chat/groupChat', {
                     method: "GET",
-                    credentials: "include"
+                    credentials: "include",
+                    headers:{
+                        jwtToken: document.cookie.split('=')[1],
+                    }
                 });
                 const data = await res.json();
                 if (data.error) {

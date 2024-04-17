@@ -10,9 +10,12 @@ export const useGetConversations = () => {
         const getConversations = async () => {
             setLoading(true);   
             try {
-                const res = await fetch('https://chatapp-iyi3.onrender.com/api/users',{
+                const res = await fetch('http://localhost:5000/api/users',{
                     method:"GET",
                     credentials:"include",
+                    headers: {
+                        jwtToken:document.cookie.split('=')[1],
+                    }
                 
                 })
                 const data = await res.json();
