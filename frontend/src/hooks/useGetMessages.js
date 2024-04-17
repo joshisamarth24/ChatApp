@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import useGroup from "../Zustand/useGroup";
 
 const useGetMessages = () =>{
-    let url = "http://localhost:5000/api/messages/"
+    let url = "https://chatapp-iyi3.onrender.com/api/messages/"
     const [loading,setLoading] = useState(false);
     const {messages,setMessages,selectedConversation} = useConversation();
     const {selectedGroup,groupMessages,setGroupMessages} = useGroup();

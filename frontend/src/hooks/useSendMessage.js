@@ -5,7 +5,7 @@ import useGroup from "../Zustand/useGroup";
 
 const useSendMessage = () => {
     const [loading,setLoading] = useState(false);
-    let url = "http://localhost:5000/api/messages/";
+    let url = "https://chatapp-iyi3.onrender.com/api/messages/";
     const {messages,setMessages,selectedConversation} = useConversation();
     const {selectedGroup,groupMessages,setGroupMessages} = useGroup();
     if(selectedGroup){

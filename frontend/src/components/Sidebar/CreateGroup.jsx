@@ -44,7 +44,7 @@ const CreateGroup = ({ setShowCreateGroup }) => {
     const handleSubmit = async(e) => {
         
         try {
-            const res = await fetch('http://localhost:5000/api/chat/createGroup', {
+            const res = await fetch('https://chatapp-iyi3.onrender.com/api/chat/createGroup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
