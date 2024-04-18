@@ -1,10 +1,11 @@
 import { useState,useEffect } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../Context/AuthContext";
 
-const jwtToken = document.cookie.split("=")[1];
 export const useGetConversations = () => {
     const [loading,setLoading] = useState(false);
     const [conversations,setConversations] = useState([]);
+    const {user} = useAuthContext();
 
     useEffect(()=>{
         const getConversations = async () => {
@@ -14,7 +15,7 @@ export const useGetConversations = () => {
                     method:"GET",
                     credentials:"include",
                     headers: {
-                        jwtToken:document.cookie.split('=')[1],
+                        jwtToken:`${user?.token}`,
                     }
                 
                 })

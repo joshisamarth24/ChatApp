@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useAuthContext } from "../Context/AuthContext";
 
 const useGetGroupChats = () => {
     const [loading, setLoading] = useState(true);
     const [groupChats, setGroupChats] = useState([]);
+    const {user} = useAuthContext();
 
     useEffect(() => {
         const getGroupChats = async () => {
@@ -11,7 +13,7 @@ const useGetGroupChats = () => {
                     method: "GET",
                     credentials: "include",
                     headers:{
-                        jwtToken: document.cookie.split('=')[1],
+                        jwtToken: `${user?.token}`,
                     }
                 });
                 const data = await res.json();

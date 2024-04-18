@@ -2,9 +2,11 @@ import { useState } from "react"
 import useConversation from "../Zustand/useConversation";
 import toast from "react-hot-toast";
 import useGroup from "../Zustand/useGroup";
+import { useAuthContext } from "../Context/AuthContext";
 
 const useSendMessage = () => {
     const [loading,setLoading] = useState(false);
+    const {user} = useAuthContext();
     let url = "https://chatapp-iyi3.onrender.com/api/messages/";
     const {messages,setMessages,selectedConversation} = useConversation();
     const {selectedGroup,groupMessages,setGroupMessages} = useGroup();
@@ -23,7 +25,7 @@ const useSendMessage = () => {
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
-                jwtToken:document.cookie.split('=')[1],
+                jwtToken: `${user?.token}`,
             },
             credentials:"include",
             body:JSON.stringify({message,file:fileMessage})

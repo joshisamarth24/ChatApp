@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import useConversation from "../Zustand/useConversation";
 import toast from "react-hot-toast";
 import useGroup from "../Zustand/useGroup";
+import { useAuthContext } from "../Context/AuthContext";
 
 export const useDeleteChat = () => {
     const [loading,setLoading] = useState(false);
     const {setMessages,selectedConversation} = useConversation();
+    const {user} = useAuthContext();
     const {setGroupMessages,selectedGroup} = useGroup();
     const convId = selectedConversation? selectedConversation._id : selectedGroup?._id;
         const clearChat = async()=>{
@@ -16,7 +18,7 @@ export const useDeleteChat = () => {
                     credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
-                        jwtToken: document.cookie.split('=')[1],
+                        jwtToken: `${user?.token}`,
                     },
                 });
                 if(res.status === 200 && selectedConversation){

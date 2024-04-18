@@ -14,8 +14,6 @@ const useSignUp = () => {
     try {
       const res = await fetch('https://chatapp-iyi3.onrender.com/api/auth/signup',{
         method:"POST",
-        credentials:"include",
-       
         body: UserDetails
       })
 

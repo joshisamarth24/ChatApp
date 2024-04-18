@@ -4,12 +4,14 @@ import useGetConversations from '../../hooks/useGetConversations';
 import { BsPlus } from 'react-icons/bs';
 import toast from 'react-hot-toast';
 import useGetGroupChats from '../../hooks/useGetGroupChats';
+import { useAuthContext } from '../../Context/AuthContext';
 
 const CreateGroup = ({ setShowCreateGroup }) => {
     const { conversations } = useGetConversations();
     const [participants, setParticipants] = useState([]);
     const [groupName, setGroupName] = useState('');
     const [groupImage, setGroupImage] = useState("");
+    const {user} = useAuthContext();
 
     const handleGroupImage = (e) => {
         const reader = new FileReader();
@@ -48,7 +50,7 @@ const CreateGroup = ({ setShowCreateGroup }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    jwtToken: document.cookie.split('=')[1],
+                    jwtToken: `${user?.token}`,
                 },
                 credentials: 'include',
                 body: JSON.stringify({ groupName,participants,groupImage }),

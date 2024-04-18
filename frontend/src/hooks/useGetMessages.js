@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import useConversation from "../Zustand/useConversation";
 import toast from "react-hot-toast";
 import useGroup from "../Zustand/useGroup";
+import { useAuthContext } from "../Context/AuthContext";
 
 const useGetMessages = () =>{
-    let url = "https://chatapp-iyi3.onrender.com/api/messages/"
+    let url = "https://chatapp-iyi3.onrender.com/api/messages/";
+    const {user} = useAuthContext();
     const [loading,setLoading] = useState(false);
     const {messages,setMessages,selectedConversation} = useConversation();
     const {selectedGroup,groupMessages,setGroupMessages} = useGroup();
@@ -22,7 +24,7 @@ const useGetMessages = () =>{
                 const res = await fetch(url,{
                     credentials: 'include',
                     headers: {
-                        jwtToken: document.cookie.split('=')[1],
+                        jwtToken: `${user?.token}`,
                     }
                 });
                 const data = await res.json();

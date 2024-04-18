@@ -7,7 +7,7 @@ const router = Router();
 const upload = multer({dest:"uploads/"});
 
 router.post("/login", login);
-router.post("/signup",upload.single("profilePic"), signup);
+router.post("/signup", signup);
 router.post("/logout", logout);
 
 export default router;
