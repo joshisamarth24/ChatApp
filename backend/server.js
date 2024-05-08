@@ -15,7 +15,7 @@ import { app, server } from "./socket/socket.js";
 const port = process.env.PORT || 5000;
 dotenv.config();
 app.use(cors({
-  origin: "https://chat-app-sable-omega.vercel.app",
+  origin: "https://chat-app-sable-omega.vercel.app" || "https://chat-app-joshisamarth24gmailcoms-projects.vercel.app" || "https://chat-app-git-main-joshisamarth24gmailcoms-projects.vercel.app",
   credentials: true
 }));
 
