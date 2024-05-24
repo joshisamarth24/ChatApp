@@ -7,7 +7,6 @@ const useSignUp = () => {
   const {setUser} = useAuthContext();
 
   const signup = async ({fullName,username,email,password,confirmPassword,profilePic}) => {
-    console.log(fullName,username,email,password,confirmPassword,profilePic);
     setLoading(true);
 
     try {
