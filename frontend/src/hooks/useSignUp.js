@@ -6,15 +6,13 @@ const useSignUp = () => {
   const [loading, setLoading] = useState(false);
   const {setUser} = useAuthContext();
 
-  const signup = async (UserDetails) => {
-    // const success = handleInputErrors({fullName,username,email,password,confirmPassword,profilePic});
-    // if (!success) return;
+  const signup = async ({fullName,username,email,password,confirmPassword,profilePic}) => {
     setLoading(true);
 
     try {
       const res = await fetch('https://chatapp-iyi3.onrender.com/api/auth/signup',{
         method:"POST",
-        body: UserDetails
+        body: JSON.stringify({fullName,username,email,password,confirmPassword,profilePic}),
       })
 
       const data = await res.json();
@@ -40,17 +38,6 @@ const useSignUp = () => {
 }
 
 
-const handleInputErrors = ({fullName,username,email,password,confirmPassword,profilePic}) => {
-  if(!fullName || !username || !email || !password || !confirmPassword) {
-    toast.error("All fields are required.");
-    return false;
-  }
-  if(password !== confirmPassword) {
-    toast.error("Password doesn't match.");
-    return false;
-  }
-  return true;
-};
 
 
 export default useSignUp;

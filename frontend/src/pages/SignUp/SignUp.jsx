@@ -11,6 +11,7 @@ const SignUp = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    profilePic: ''
   })
   const {loading,signup} = useSignUp();
 
@@ -59,13 +60,7 @@ const uploadFile = async (image) => {
     e.preventDefault();
     const success = handleInputErrors(inputs);
    if(success){
-    const userDetails = new FormData();
-    userDetails.append('fullName',inputs.fullName);
-    userDetails.append('username',inputs.username);
-    userDetails.append('email',inputs.email);
-    userDetails.append('password',inputs.password);
-    userDetails.append('confirmPassword',inputs.confirmPassword);
-    userDetails.append('profilePic',profilePic);
+      const userDetails = {...inputs,profilePic};
    
     signup(userDetails);
    }
