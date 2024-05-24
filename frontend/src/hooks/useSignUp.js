@@ -12,6 +12,7 @@ const useSignUp = () => {
     try {
       const res = await fetch('https://chatapp-iyi3.onrender.com/api/auth/signup',{
         method:"POST",
+        headers:{"Content-Type":"application/json"},
         body: JSON.stringify({fullName,username,email,password,confirmPassword,profilePic}),
       })
 
