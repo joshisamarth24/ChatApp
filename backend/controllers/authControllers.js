@@ -5,7 +5,7 @@ import cloudinary from "../utils/cloudinary.js";
 
 export const signup = async (req, res) => {
     const {fullName,username,email,password,confirmPassword,profilePic} = req.body;
-    console.log(password)
+    console.log(req.body)
     try {
         if(password !== confirmPassword) return res.status(400).json({error: "Password doesn't match."});
         const user = await User.findOne({username});
